@@ -38,7 +38,7 @@ RCT_EXPORT_METHOD(Show:(nonnull NSNumber *)targetViewTag inParentView:(nonnull N
   }
     
   NSString *text = [props objectForKey: @"text"];
-//  NSNumber *position = [props objectForKey: @"position"]; // not used yet
+  NSNumber *position = [props objectForKey: @"position"]; // not used yet
 //  NSNumber *align = [props objectForKey: @"align"]; // not used yet
   NSNumber *autoHide = [props objectForKey: @"autoHide"];
   NSNumber *duration = [props objectForKey: @"duration"];
@@ -61,11 +61,33 @@ RCT_EXPORT_METHOD(Show:(nonnull NSNumber *)targetViewTag inParentView:(nonnull N
     TooltipDelegate *delegate = [[TooltipDelegate alloc] init];
     delegate.onHide = onHide;
     [toolTip setDelegate: delegate];
-
     toolTip.color = [RNTooltips colorFromHexCode: tintColor];
     toolTip.cornerRadius = [corner floatValue];
     toolTip.dismissesOnTap = [clickToHide boolValue];
     toolTip.padding = UIEdgeInsetsMake(6.0, 8.0, 6.0, 8.0);
+    toolTip.permittedArrowDirections = @[];
+    
+
+    switch([position intValue]) {
+        case 1: {
+            toolTip.arrowDirection = SexyTooltipArrowDirectionRight;
+            break;
+        }
+        case 2: {
+            toolTip.arrowDirection = SexyTooltipArrowDirectionLeft;
+            break;
+        }
+        case 3: {
+            toolTip.arrowDirection = SexyTooltipArrowDirectionDown;
+            break;
+        }
+        case 4: {
+            toolTip.arrowDirection = SexyTooltipArrowDirectionUp;
+            break;
+        }
+    }
+   
+    
     
     if (![arrow boolValue]) {
         toolTip.arrowHeight = 0;

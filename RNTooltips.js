@@ -10,20 +10,20 @@ import PropTypes from "prop-types";
 let { RNTooltips } = NativeModules;
 
 class Tooltips extends PureComponent {
-  static POSITION: {
+  static POSITION = {
     LEFT: 1,
     RIGHT: 2,
     TOP: 3,
     BOTTOM: 4
   };
 
-  static ALIGN: {
+  static ALIGN = {
     START: 1,
     CENTER: 2,
     END: 3
   };
 
-  static GRAVITY: {
+  static GRAVITY = {
     START: 1,
     CENTER: 2,
     END: 3
@@ -53,7 +53,7 @@ class Tooltips extends PureComponent {
 
   static defaultProps = {
     text: "",
-    position: 4,
+    position: Tooltips.POSITION.TOP,
     align: 2,
     autoHide: true,
     duration: Platform.OS === "android" ? 4000 : 4,
